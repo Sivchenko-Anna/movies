@@ -1,11 +1,15 @@
-import './App.css'
+import { Provider } from "react-redux";
+import store from "./store.js";
+import CssBaseline from "@mui/material/CssBaseline";
+import Header from "./components/header/index.jsx";
 
 function App() {
   return (
-    <>
-      <h1>Movies</h1>
-    </>
-  )
+    <Provider store={store}>
+      <CssBaseline />
+      <Header/>
+    </Provider>
+  );
 }
 
-export default App
+export default App;
