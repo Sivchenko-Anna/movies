@@ -9,7 +9,7 @@ const API = {
     SEARCH: "/search/movie?query=",
     DISCOVER: "/discover/movie",
     ACTORS: "/credits",
-    LANGUAGE: "?language=ru-RU",
+    LANGUAGE: "language=ru-RU",
     PAGE: "&page=",
     GET_FAVOTIRE: (accountId) => `/account/${accountId}/favorite/movies`,
     SET_FAVORITE: (accountId) => `/account/${accountId}/favorite`,
