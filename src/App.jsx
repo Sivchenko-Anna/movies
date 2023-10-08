@@ -6,12 +6,12 @@ import ToggleTheme from "./theme/toggle_theme";
 
 function App() {
   return (
-    <ToggleTheme>
-      <Provider store={store}>
+    <Provider store={store}>
+      <ToggleTheme>
         <CssBaseline />
         <Header />
-      </Provider>
-    </ToggleTheme>
+      </ToggleTheme>
+    </Provider>
   );
 }
 
