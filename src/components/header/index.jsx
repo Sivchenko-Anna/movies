@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Box, AppBar, Toolbar, Typography, IconButton } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import AccountCircleIcon from "@mui/icons-material/Person";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
@@ -11,8 +10,7 @@ import { ColorThemeContext } from "../../theme/toggle_theme.jsx";
 const Header = () => {
   const isModalOpen = useSelector((state) => state.modal.isModalOpen);
   const dispatch = useDispatch();
-  const theme = useTheme();
-  const { toggleColorMode } = useContext(ColorThemeContext);
+  const { toggleColorMode, theme } = useContext(ColorThemeContext);
 
   function handleModal() {
     if (isModalOpen) {
@@ -23,18 +21,18 @@ const Header = () => {
   }
 
   return (
-    <Box sx={{ flexGrow: 1, bgcolor: theme.palette.background.paper }}>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar
         position="static"
         sx={{
-          backgroundColor: theme.palette.background.paper,
+          backgroundColor: theme.palette.primary.main,
         }}
       >
         <Toolbar>
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, color: theme.palette.secondary.main }}
+            sx={{ flexGrow: 1, color: theme.palette.text.primary }}
           >
             Movies
           </Typography>
@@ -46,7 +44,10 @@ const Header = () => {
             )}
           </IconButton>
           <IconButton onClick={handleModal}>
-            <AccountCircleIcon fontSize="inherit" sx={{ color: "#0c0e10" }} />
+            <AccountCircleIcon
+              fontSize="inherit"
+              sx={{ color: theme.palette.text.primary }}
+            />
           </IconButton>
           {/* {isModalOpen && (
             <ModalAuthorization open={isModalOpen} handleClose={handleModal} />
