@@ -1,14 +1,20 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 import { Dialog, Box } from "@mui/material";
 import { getUserId } from "../../slices/user_slice";
 import { style } from "./style";
+
+ModalAuthorization.propTypes = {
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+};
 
 const ModalAuthorization = ({ open, handleClose }) => {
   const {
     email: userEmail,
     token: userToken,
-    isAuth: isUserAuth,
+    isAuthenticated: isUserAuth,
   } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -18,7 +24,9 @@ const ModalAuthorization = ({ open, handleClose }) => {
         dispatch(getUserId());
       }
     };
-    fetchAuthComplete();
+    if (userToken) {
+      fetchAuthComplete();
+    }
   }, [dispatch, userToken]);
 
   const handleAuth = () => {
@@ -31,6 +39,7 @@ const ModalAuthorization = ({ open, handleClose }) => {
     if (isUserAuth) {
       // return <ModalUser />;
     }
+    return null;
   };
 
   return (
