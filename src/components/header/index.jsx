@@ -6,6 +6,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { openModal, closeModal } from "../../slices/modal_slice.js";
 import { ColorThemeContext } from "../../theme/toggle_theme.jsx";
+import ModalAuthorization from "../modal/index.jsx";
 
 const Header = () => {
   const isModalOpen = useSelector((state) => state.modal.isModalOpen);
@@ -49,9 +50,9 @@ const Header = () => {
               sx={{ color: theme.palette.text.primary }}
             />
           </IconButton>
-          {/* {isModalOpen && (
+          {isModalOpen && (
             <ModalAuthorization open={isModalOpen} handleClose={handleModal} />
-          )} */}
+          )}
         </Toolbar>
       </AppBar>
     </Box>

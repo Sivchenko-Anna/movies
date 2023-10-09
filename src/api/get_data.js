@@ -1,6 +1,6 @@
 import { API } from "./variables.js";
 
-export async function getMoviesData(url) {
+export async function getData(url) {
   try {
     const response = await fetch(url, {
       method: API.METHODS.GET,
