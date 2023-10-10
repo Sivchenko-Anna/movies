@@ -5,6 +5,7 @@ import { Dialog } from "@mui/material";
 import { getUserId } from "../../slices/user_slice";
 import { ColorThemeContext } from "../../theme/toggle_theme";
 import ModalEmail from "../modal_email";
+import ModalToken from "../modal_token";
 
 const ModalAuthorization = ({ open, handleClose }) => {
   const { theme } = useContext(ColorThemeContext);
@@ -31,7 +32,7 @@ const ModalAuthorization = ({ open, handleClose }) => {
       return <ModalEmail />;
     }
     if (!userToken) {
-      // return <ModalToken />;
+      return <ModalToken />;
     }
     if (isUserAuth) {
       // return <ModalUser />;
