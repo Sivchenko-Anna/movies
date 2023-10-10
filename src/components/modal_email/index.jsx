@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../slices/user_slice";
 import Grid from "@mui/material/Grid";
@@ -9,8 +9,11 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
+import { alpha } from "@mui/system";
+import { ColorThemeContext } from "../../theme/toggle_theme";
 
 const ModalEmail = () => {
+  const { theme } = useContext(ColorThemeContext);
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
 
@@ -43,12 +46,23 @@ const ModalEmail = () => {
             variant="standard"
             fullWidth
             onChange={handleChange}
+            color="secondary"
+            inputProps={{ style: { color: theme.palette.text.secondary } }}
           />
           <DialogActions>
             <Button
               type="submit"
               disabled={!email}
-              sx={{ marginTop: "18px", mx: "auto" }}
+              sx={{
+                marginTop: "18px",
+                mx: "auto",
+                backgroundColor: theme.palette.background.custom,
+                color: theme.palette.text.primary,
+                "&:hover": {
+                  backgroundColor: (theme) =>
+                    alpha(theme.palette.background.custom, 0.8),
+                },
+              }}
             >
               Запросить
             </Button>

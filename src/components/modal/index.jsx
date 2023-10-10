@@ -1,11 +1,13 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-import { Dialog, Box } from "@mui/material";
+import { Dialog } from "@mui/material";
 import { getUserId } from "../../slices/user_slice";
+import { ColorThemeContext } from "../../theme/toggle_theme";
 import ModalEmail from "../modal_email";
 
 const ModalAuthorization = ({ open, handleClose }) => {
+  const { theme } = useContext(ColorThemeContext);
   const {
     email: userEmail,
     token: userToken,
@@ -38,8 +40,19 @@ const ModalAuthorization = ({ open, handleClose }) => {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} fullWidth={true}>
-      <Box>{handleAuth()}</Box>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      fullWidth={true}
+      sx={{
+        "& .MuiPaper-root": {
+          borderRadius: "20px",
+          boxShadow: "0px 4px 40px rgba(0, 0, 0, 0.25)",
+          color: theme.palette.text.secondary,
+        },
+      }}
+    >
+      {handleAuth()}
     </Dialog>
   );
 };

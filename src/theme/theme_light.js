@@ -7,11 +7,16 @@ const themeLight = createTheme({
       main: "#5e35b1",
     },
     secondary: {
-      main: "#ff5252",
+      main: "#c28dea",
     },
     text: {
       primary: "#FFFFFF",
-      secondary: "#FFFFFF",
+      secondary: "#5e35b1",
+    },
+    background: {
+      paper: "#FFFFFF",
+      default: "#FFFFFF",
+      custom: "#6e49b8",
     },
   },
 });
