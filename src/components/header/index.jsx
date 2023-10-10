@@ -1,25 +1,18 @@
 import { useContext } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Box, AppBar, Toolbar, Typography, IconButton } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/Person";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { openModal, closeModal } from "../../slices/modal_slice.js";
+import { showModal } from "../../slices/modal_slice.js";
 import { ColorThemeContext } from "../../theme/toggle_theme.jsx";
 import ModalAuthorization from "../modal/index.jsx";
 
 const Header = () => {
-  const isModalOpen = useSelector((state) => state.modal.isModalOpen);
   const dispatch = useDispatch();
   const { toggleColorMode, theme } = useContext(ColorThemeContext);
 
-  function handleModal() {
-    if (isModalOpen) {
-      dispatch(closeModal());
-    } else {
-      dispatch(openModal());
-    }
-  }
+  const handleModal = () => dispatch(showModal({ isModalOpen: true }));
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -50,9 +43,7 @@ const Header = () => {
               sx={{ color: theme.palette.text.primary }}
             />
           </IconButton>
-          {isModalOpen && (
-            <ModalAuthorization open={isModalOpen} handleClose={handleModal} />
-          )}
+          <ModalAuthorization/>
         </Toolbar>
       </AppBar>
     </Box>

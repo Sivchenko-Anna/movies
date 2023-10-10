@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../slices/user_slice";
 import Grid from "@mui/material/Grid";
 import {
+  Box,
   Button,
   DialogActions,
   DialogContent,
@@ -33,41 +34,39 @@ const ModalEmail = () => {
         <DialogTitle sx={{ mx: "auto" }}>Запросить токен</DialogTitle>
       </Grid>
       <Grid item>
-        <DialogContent
-          sx={{ mx: "auto" }}
-          component="form"
-          onSubmit={handleSaveEmail}
-        >
-          <TextField
-            autoFocus
-            label="Введите email"
-            type="email"
-            id="email"
-            variant="standard"
-            fullWidth
-            onChange={handleChange}
-            color="secondary"
-            inputProps={{ style: { color: theme.palette.text.secondary } }}
-          />
-          <DialogActions>
-            <Button
-              type="submit"
-              disabled={!email}
-              sx={{
-                marginTop: "18px",
-                mx: "auto",
-                backgroundColor: theme.palette.background.custom,
-                color: theme.palette.text.primary,
-                "&:hover": {
-                  backgroundColor: (theme) =>
-                    alpha(theme.palette.background.custom, 0.8),
-                },
-              }}
-            >
-              Запросить
-            </Button>
-          </DialogActions>
-        </DialogContent>
+        <Box component="form" onSubmit={handleSaveEmail}>
+          <DialogContent sx={{ mx: "auto" }}>
+            <TextField
+              autoFocus
+              label="Введите email"
+              type="email"
+              id="email"
+              variant="standard"
+              fullWidth
+              onChange={handleChange}
+              color="secondary"
+              inputProps={{ style: { color: theme.palette.text.secondary } }}
+            />
+            <DialogActions>
+              <Button
+                type="submit"
+                disabled={!email}
+                sx={{
+                  marginTop: "18px",
+                  mx: "auto",
+                  backgroundColor: theme.palette.background.custom,
+                  color: theme.palette.text.primary,
+                  "&:hover": {
+                    backgroundColor: (theme) =>
+                      alpha(theme.palette.background.custom, 0.8),
+                  },
+                }}
+              >
+                Запросить
+              </Button>
+            </DialogActions>
+          </DialogContent>
+        </Box>
       </Grid>
     </Grid>
   );

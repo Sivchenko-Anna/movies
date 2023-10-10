@@ -21,7 +21,6 @@ export const getUserId = createAsyncThunk("user/getUserId", async () => {
       if (data.status_message) {
         throw new Error(`${data.status_message}`);
       }
-      console.log(data);
       return data;
     }
     throw new Error(`${response.status_message}`);

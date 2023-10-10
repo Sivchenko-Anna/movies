@@ -1,19 +1,20 @@
 import { useContext, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import PropTypes from "prop-types";
 import { Dialog } from "@mui/material";
 import { getUserId } from "../../slices/user_slice";
 import { ColorThemeContext } from "../../theme/toggle_theme";
+import { showModal } from "../../slices/modal_slice";
 import ModalEmail from "../modal_email";
 import ModalToken from "../modal_token";
 
-const ModalAuthorization = ({ open, handleClose }) => {
+const ModalAuthorization = () => {
   const { theme } = useContext(ColorThemeContext);
   const {
     email: userEmail,
     token: userToken,
     isAuthenticated: isUserAuth,
   } = useSelector((state) => state.user);
+  const open = useSelector((state) => state.modal.isModalOpen);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,6 +27,10 @@ const ModalAuthorization = ({ open, handleClose }) => {
       fetchAuthComplete();
     }
   }, [dispatch, userToken]);
+
+  const handleCloseModal = () => {
+    dispatch(showModal({ isModalOpen: false }));
+  };
 
   const handleAuth = () => {
     if (!userEmail) {
@@ -43,7 +48,7 @@ const ModalAuthorization = ({ open, handleClose }) => {
   return (
     <Dialog
       open={open}
-      onClose={handleClose}
+      onClose={handleCloseModal}
       fullWidth={true}
       sx={{
         "& .MuiPaper-root": {
@@ -56,11 +61,6 @@ const ModalAuthorization = ({ open, handleClose }) => {
       {handleAuth()}
     </Dialog>
   );
-};
-
-ModalAuthorization.propTypes = {
-  open: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
 };
 
 export default ModalAuthorization;
