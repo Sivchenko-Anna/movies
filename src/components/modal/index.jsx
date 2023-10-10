@@ -3,12 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { Dialog, Box } from "@mui/material";
 import { getUserId } from "../../slices/user_slice";
-import { style } from "./style";
-
-ModalAuthorization.propTypes = {
-  open: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
-};
+import ModalEmail from "../modal_email";
 
 const ModalAuthorization = ({ open, handleClose }) => {
   const {
@@ -31,7 +26,7 @@ const ModalAuthorization = ({ open, handleClose }) => {
 
   const handleAuth = () => {
     if (!userEmail) {
-      // return <ModalEmail />;
+      return <ModalEmail />;
     }
     if (!userToken) {
       // return <ModalToken />;
@@ -44,9 +39,14 @@ const ModalAuthorization = ({ open, handleClose }) => {
 
   return (
     <Dialog open={open} onClose={handleClose} fullWidth={true}>
-      <Box sx={style}>{handleAuth()}</Box>
+      <Box>{handleAuth()}</Box>
     </Dialog>
   );
+};
+
+ModalAuthorization.propTypes = {
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default ModalAuthorization;
