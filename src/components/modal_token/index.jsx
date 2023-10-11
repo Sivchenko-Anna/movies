@@ -21,7 +21,7 @@ const ModalToken = () => {
 
   const handleSaveToken = (event) => {
     event.preventDefault();
-    dispatch(setUser({ token: token }));
+    dispatch(setUser({ token: token, isAuthenticated: true }));
     dispatch(showModal({ isModalOpen: false }));
   };
 
@@ -33,7 +33,7 @@ const ModalToken = () => {
   return (
     <Grid container direction="column" spacing={2}>
       <Grid item>
-        <DialogTitle sx={{ mx: "auto" }}>Введите токен</DialogTitle>
+        <DialogTitle sx={{ textAlign: "center" }}>Введите токен</DialogTitle>
       </Grid>
       <Grid item>
         <Box component="form" onSubmit={handleSaveToken}>

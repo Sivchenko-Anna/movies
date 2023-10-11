@@ -31,7 +31,7 @@ const ModalEmail = () => {
   return (
     <Grid container direction="column" spacing={2}>
       <Grid item>
-        <DialogTitle sx={{ mx: "auto" }}>Запросить токен</DialogTitle>
+        <DialogTitle sx={{ textAlign: "center" }}>Запросить токен</DialogTitle>
       </Grid>
       <Grid item>
         <Box component="form" onSubmit={handleSaveEmail}>

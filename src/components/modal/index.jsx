@@ -6,6 +6,7 @@ import { ColorThemeContext } from "../../theme/toggle_theme";
 import { showModal } from "../../slices/modal_slice";
 import ModalEmail from "../modal_email";
 import ModalToken from "../modal_token";
+import ModalUser from "../modal_user";
 
 const ModalAuthorization = () => {
   const { theme } = useContext(ColorThemeContext);
@@ -40,7 +41,7 @@ const ModalAuthorization = () => {
       return <ModalToken />;
     }
     if (isUserAuth) {
-      // return <ModalUser />;
+      return <ModalUser />;
     }
     return null;
   };
