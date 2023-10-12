@@ -4,10 +4,11 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Header from "./components/header/index.jsx";
 import ToggleTheme from "./theme/toggle_theme";
 import Main from "./components/main/index.jsx";
+import AuthorizationMessage from "./components/authorization_message/index.jsx";
 
 function App() {
   const isUserAuthorize = useSelector((state) => state.user.isAuthenticated);
-  const content = isUserAuthorize ? <Outlet /> : null;
+  const content = isUserAuthorize ? <Outlet /> : <AuthorizationMessage/>;
   return (
       <ToggleTheme>
         <CssBaseline />
