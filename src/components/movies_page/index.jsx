@@ -1,16 +1,18 @@
-import { Grid } from "@mui/material";
+import { Box } from "@mui/material";
+import Sidebar from "../sidebar";
 
 const MoviesPage = () => {
   return (
-    <Grid
-      container
-      columns={{ xs: 12, sm: 4 }}
-      columnSpacing={2}
-      alignItems="flex-start"
+    <Box
+      sx={{
+        display: "flex",
+        gap: "10px",
+        alignItems: "flex-start",
+      }}
+      p={1}
     >
-      <Grid item>{/* <Sidebar /> */}</Grid>
-      <Grid item>{/* <MoviesCatalog /> */}</Grid>
-    </Grid>
+      <Sidebar />
+    </Box>
   );
 };
 
