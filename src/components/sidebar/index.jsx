@@ -1,4 +1,5 @@
 import { Box, Paper } from "@mui/material";
+import PaginationMovies from "../pagination";
 
 const Sidebar = () => {
   return (
@@ -8,7 +9,14 @@ const Sidebar = () => {
         maxHeight: "520px",
       }}
     >
-      <Paper elevation={4}></Paper>
+      <Paper
+        elevation={4}
+        sx={{
+          padding: "10px 0",
+        }}
+      >
+        <PaginationMovies />
+      </Paper>
     </Box>
   );
 }
