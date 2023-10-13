@@ -24,7 +24,6 @@ const PaginationMovies = () => {
         page={page}
         size="small"
         color="secondary"
-        alignItems="center"
         onChange={handleChange}
         sx={{
           "& .MuiPagination-ul": {

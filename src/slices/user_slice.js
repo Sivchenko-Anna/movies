@@ -3,7 +3,7 @@ import { API } from "../api/variables.js";
 import { getData } from "../api/get_data.js";
 
 const initialState = {
-  isAuthenticated: false,
+  isAuthenticated: true,
   email: null,
   token: null,
   accountId: null,

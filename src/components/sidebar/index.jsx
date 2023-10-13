@@ -1,4 +1,5 @@
 import { Box, Paper } from "@mui/material";
+import MovieSearchInput from "../search_movie";
 import PaginationMovies from "../pagination";
 
 const Sidebar = () => {
@@ -15,10 +16,11 @@ const Sidebar = () => {
           padding: "10px 0",
         }}
       >
+        <MovieSearchInput />
         <PaginationMovies />
       </Paper>
     </Box>
   );
-}
+};
 
 export default Sidebar;
