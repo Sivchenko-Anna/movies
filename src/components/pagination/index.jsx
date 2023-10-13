@@ -1,10 +1,12 @@
-import { useMemo } from "react";
+import { useContext, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Pagination, Stack } from "@mui/material";
 import { setActivePage } from "../../slices/filters_slice";
+import { ColorThemeContext } from "../../theme/toggle_theme";
 
 const PaginationMovies = () => {
   const currentPage = useSelector((state) => state.filters.currentPage);
+  const { theme } = useContext(ColorThemeContext);
   const dispatch = useDispatch();
 
   const page = useMemo(() => {
@@ -27,7 +29,10 @@ const PaginationMovies = () => {
         sx={{
           "& .MuiPagination-ul": {
             justifyContent: "center",
-          }
+          },
+          "& .MuiPaginationItem-root": {
+            color: theme.palette.text.secondary,
+          },
         }}
       />
     </Stack>
