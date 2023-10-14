@@ -3,7 +3,7 @@ import { API } from "../api/variables.js";
 import { getData } from "../api/get_data.js";
 
 const initialState = {
-  isAuthenticated: true,
+  isAuthenticated: false,
   email: null,
   token: null,
   accountId: null,
@@ -16,14 +16,7 @@ export const getUserId = createAsyncThunk("user/getUserId", async () => {
   const url = `${API.URL}${API.LINKS.ACCOUNT_ID}`;
   try {
     const response = await getData(url);
-    if (response.ok) {
-      const data = await response.json();
-      if (data.status_message) {
-        throw new Error(`${data.status_message}`);
-      }
-      return data;
-    }
-    throw new Error(`${response.status_message}`);
+    return response;
   } catch (error) {
     throw new Error("Error fetching user ID:", error);
   }
