@@ -3,7 +3,6 @@ import { API } from "./variables.js";
 export async function getSearchMovie(query) {
   const fetchUrl = `${API.URL}${API.LINKS.SEARCH}${query}&${API.LINKS.LANGUAGE}`;
   try {
-    console.log(fetchUrl);
     const response = await fetch(fetchUrl, {
       method: API.METHODS.GET,
       headers: {

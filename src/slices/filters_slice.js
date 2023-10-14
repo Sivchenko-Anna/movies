@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getCurrentYear } from "../utils/utils";
 
 const initialState = {
+  selectedOptions: "Популярное",
+  selectedYears: [1980, getCurrentYear()],
+  selectedGenres: [],
   currentPage: 1,
 };
 
@@ -11,8 +15,17 @@ const filtersSlice = createSlice({
     setActivePage: (state, action) => {
       state.currentPage = action.payload.currentPage;
     },
+    resetFilters: (state) => {
+      return {
+        ...state,
+        selectedOptions: "Популярное",
+        selectedYear: [1980, getCurrentYear()],
+        selectedGenres: [],
+        currentPage: 1,
+      };
+    },
   },
 });
 
-export const { setActivePage } = filtersSlice.actions;
+export const { setActivePage, resetFilters } = filtersSlice.actions;
 export default filtersSlice.reducer;
