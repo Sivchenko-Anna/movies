@@ -32,6 +32,7 @@ const PaginationMovies = () => {
           "& .MuiPaginationItem-root": {
             color: theme.palette.text.secondary,
           },
+          padding: "10px 0"
         }}
       />
     </Stack>
