@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { resetFilters } from "../../slices/filters_slice";
+import { resetFilters } from "../../slices/movies_slice";
 import { Box, IconButton, Typography } from "@mui/material";
 import { Close } from "@mui/icons-material";
 

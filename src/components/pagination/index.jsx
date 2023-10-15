@@ -1,11 +1,11 @@
 import { useContext, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Pagination, Stack } from "@mui/material";
-import { setActivePage } from "../../slices/filters_slice";
+import { setActivePage } from "../../slices/movies_slice";
 import { ColorThemeContext } from "../../theme/toggle_theme";
 
 const PaginationMovies = () => {
-  const currentPage = useSelector((state) => state.filters.currentPage);
+  const currentPage = useSelector((state) => state.movies.currentPage);
   const { theme } = useContext(ColorThemeContext);
   const dispatch = useDispatch();
 

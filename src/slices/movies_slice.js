@@ -1,8 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getSearchMovie } from "../api/get_search_movie";
+import { getCurrentYear } from "../utils/utils";
 
 const initialState = {
   search: "",
+  selectedOptions: "Популярное",
+  selectedYears: [1980, getCurrentYear()],
+  selectedGenres: [],
+  currentPage: 1,
   MoviesCatalog: [],
 };
 
@@ -28,13 +33,25 @@ const moviesSlice = createSlice({
       state.search = action.payload.search;
     },
   },
+  setActivePage: (state, action) => {
+    state.currentPage = action.payload.currentPage;
+  },
+  resetFilters: (state) => {
+    return {
+      ...state,
+      selectedOptions: "Популярное",
+      selectedYear: [1980, getCurrentYear()],
+      selectedGenres: [],
+      currentPage: 1,
+    };
+  },
   extraReducers: (builder) => {
     builder.addCase(searchMovie.fulfilled, (state, action) => {
       state.MoviesCatalog = action.payload.results;
     });
-  }
+  },
 });
 
-export const { setSearchMovie } = moviesSlice.actions;
+export const { setSearchMovie, setActivePage, resetFilters } = moviesSlice.actions;
 export { searchMovie };
 export default moviesSlice.reducer;
