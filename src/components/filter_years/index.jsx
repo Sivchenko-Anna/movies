@@ -13,7 +13,7 @@ const SortByYears = () => {
   };
 
   return (
-    <Box p={2}>
+    <Box pt={3}>
       <Typography color="text.secondary">Год релиза:</Typography>
       <Slider
         size="small"

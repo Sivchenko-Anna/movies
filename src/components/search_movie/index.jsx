@@ -28,7 +28,7 @@ const MovieSearchInput = () => {
   );
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center" }} p={2}>
+    <Box sx={{ display: "flex", alignItems: "center" }} pt={2}>
       <TextField
         label="Название фильма"
         onChange={handleSearchChange}

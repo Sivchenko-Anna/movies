@@ -22,7 +22,7 @@ const SortByOption = () => {
     window.scrollTo(0, 0);
   };
   return (
-    <Box p={2}>
+    <Box pt={3}>
       <FormControl variant="standard" fullWidth>
         <InputLabel variant="standard" htmlFor="sort-option">
           Сортировать по:

@@ -7,7 +7,7 @@ import SortByGenres from "../filter_genres";
 
 const Filters = () => {
   return (
-    <Box>
+    <Box p={2} pb={1}>
       <FiltersBar />
       <MovieSearchInput />
       <SortByOption />

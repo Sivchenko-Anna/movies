@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Autocomplete, Box, TextField, Checkbox } from "@mui/material";
+import { ColorThemeContext } from "../../theme/toggle_theme";
 import { setActiveGenres, fetchGenres } from "../../slices/movies_slice";
 
 const SortByGenres = () => {
+  const { theme } = useContext(ColorThemeContext);
   const genres = useSelector((state) => state.movies.genres);
   const dispatch = useDispatch();
 
@@ -16,11 +18,10 @@ const SortByGenres = () => {
   };
 
   return (
-    <Box p={2}>
+    <Box sx={{ height: "170px", overflowY: "auto", overflowX: "hidden" }}>
       <Autocomplete
         size="small"
         multiple
-        limitTags={4}
         disableCloseOnSelect
         options={genres}
         getOptionLabel={(option) => option.name}
@@ -28,12 +29,24 @@ const SortByGenres = () => {
           <TextField {...params} variant="standard" label="Жанры" />
         )}
         renderOption={(props, option, { selected }) => (
-          <li {...props}>
-            <Checkbox size="small" checked={selected} />
+          <li {...props} style={{ color: theme.palette.text.secondary }}>
+            <Checkbox
+              size="small"
+              checked={selected}
+              style={{ color: theme.palette.text.secondary }}
+            />
             {option.name}
           </li>
         )}
         onChange={handleChange}
+        sx={{
+          "& .MuiChip-label": {
+            color: theme.palette.text.primary,
+          },
+          "& .MuiChip-root": {
+            bgcolor: theme.palette.background.custom,
+          },
+        }}
       />
     </Box>
   );

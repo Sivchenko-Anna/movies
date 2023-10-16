@@ -17,7 +17,6 @@ const FiltersBar = () => {
         justifyContent: "space-between",
         alignItems: "center",
       }}
-      p={2}
     >
       <Typography variant="h5" component="h5" color="text.secondary">
         Фильтры
