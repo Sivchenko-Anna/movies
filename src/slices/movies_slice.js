@@ -19,7 +19,6 @@ const searchMovie = createAsyncThunk("movies/searchMovie", async (query) => {
   try {
     const response = await getSearchMovie(query);
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     throw new Error("Error search Movie:", error);
@@ -43,8 +42,8 @@ const moviesSlice = createSlice({
     resetFilters: (state) => {
       return {
         ...state,
-        selectedOptions: "Популярное",
-        selectedYear: [1980, getCurrentYear()],
+        selectedOption: "Популярное",
+        selectedYears: [1980, getCurrentYear()],
         selectedGenres: [],
         currentPage: 1,
       };

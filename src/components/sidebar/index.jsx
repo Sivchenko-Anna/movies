@@ -9,15 +9,19 @@ const Sidebar = () => {
     <Box
       sx={{
         width: "20%",
+        minWidth: "220px",
         maxHeight: "520px",
       }}
     >
       <Paper
         elevation={4}
+        sx={{
+          borderRadius: "10px",
+        }}
       >
-        <FiltersBar/>
+        <FiltersBar />
         <MovieSearchInput />
-        <SortByOption/>
+        <SortByOption />
         <PaginationMovies />
       </Paper>
     </Box>
