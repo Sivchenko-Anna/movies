@@ -11,6 +11,7 @@ const initialState = {
   selectedOption: "popularity",
   selectedYears: [1960, getCurrentYear()],
   selectedGenres: [],
+  genres: [],
   currentPage: 1,
   MoviesCatalog: [],
 };
@@ -25,6 +26,11 @@ const searchMovie = createAsyncThunk("movies/searchMovie", async (query) => {
   }
 });
 
+const fetchGenres = createAsyncThunk("movies/fetchGenres", async () => {
+  const data = await getGenres();
+  return data.genres;
+});
+
 const moviesSlice = createSlice({
   name: "movies",
   initialState,
@@ -37,6 +43,9 @@ const moviesSlice = createSlice({
     },
     setActiveYears: (state, action) => {
       state.selectedYears = action.payload;
+    },
+    setActiveGenres: (state, action) => {
+      state.selectedGenres = action.payload;
     },
     setActivePage: (state, action) => {
       state.currentPage = action.payload.currentPage;
@@ -58,7 +67,7 @@ const moviesSlice = createSlice({
   },
 });
 
-export const { setSearchMovie, setActiveOption, setActiveYears, setActivePage, resetFilters } =
+export const { setSearchMovie, setActiveOption, setActiveYears, setActiveGenres, setActivePage, resetFilters } =
   moviesSlice.actions;
-export { searchMovie };
+export { searchMovie, fetchGenres };
 export default moviesSlice.reducer;
