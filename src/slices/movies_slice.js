@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getSearchMovie } from "../api/get_search_movie";
 import { getCurrentYear } from "../utils/utils";
+import { getData } from "../api/get_data";
+import { API } from "../api/variables";
 
 const initialState = {
   search: "",
@@ -27,7 +29,8 @@ const searchMovie = createAsyncThunk("movies/searchMovie", async (query) => {
 });
 
 const fetchGenres = createAsyncThunk("movies/fetchGenres", async () => {
-  const data = await getGenres();
+  const url = `${API.URL}${API.LINKS.GENRE}?${API.LINKS.LANGUAGE}`
+  const data = await getData(url);
   return data.genres;
 });
 
@@ -61,13 +64,23 @@ const moviesSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(searchMovie.fulfilled, (state, action) => {
-      state.MoviesCatalog = action.payload.results;
-    });
+    builder
+      .addCase(searchMovie.fulfilled, (state, action) => {
+        state.MoviesCatalog = action.payload.results;
+      })
+      .addCase(fetchGenres.fulfilled, (state, action) => {
+        state.genres = action.payload;
+      });
   },
 });
 
-export const { setSearchMovie, setActiveOption, setActiveYears, setActiveGenres, setActivePage, resetFilters } =
-  moviesSlice.actions;
+export const {
+  setSearchMovie,
+  setActiveOption,
+  setActiveYears,
+  setActiveGenres,
+  setActivePage,
+  resetFilters,
+} = moviesSlice.actions;
 export { searchMovie, fetchGenres };
 export default moviesSlice.reducer;

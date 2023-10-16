@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Autocomplete, Box, TextFieid, Checkbox } from "@mui/material";
+import { Autocomplete, Box, TextField, Checkbox } from "@mui/material";
 import { setActiveGenres, fetchGenres } from "../../slices/movies_slice";
 
 const SortByGenres = () => {
@@ -25,14 +25,11 @@ const SortByGenres = () => {
         options={genres}
         getOptionLabel={(option) => option.name}
         renderInput={(params) => (
-          <TextFieid {...params} variant="standard" label="Жанры" />
+          <TextField {...params} variant="standard" label="Жанры" />
         )}
         renderOption={(props, option, { selected }) => (
           <li {...props}>
-            <Checkbox
-              size="small"
-              checked={selected}
-            />
+            <Checkbox size="small" checked={selected} />
             {option.name}
           </li>
         )}
