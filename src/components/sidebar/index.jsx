@@ -1,8 +1,6 @@
 import { Box, Paper } from "@mui/material";
-import MovieSearchInput from "../search_movie";
 import PaginationMovies from "../pagination";
-import FiltersBar from "../filters_bar";
-import SortByOption from "../filter_sorting";
+import Filters from "../filters";
 
 const Sidebar = () => {
   return (
@@ -19,9 +17,7 @@ const Sidebar = () => {
           borderRadius: "10px",
         }}
       >
-        <FiltersBar />
-        <MovieSearchInput />
-        <SortByOption />
+        <Filters/>
         <PaginationMovies />
       </Paper>
     </Box>
