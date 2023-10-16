@@ -9,7 +9,7 @@ const initialState = {
     { id: 1, value: "raiting", label: "Топ рейтинг" },
   ],
   selectedOption: "popularity",
-  selectedYears: [1980, getCurrentYear()],
+  selectedYears: [1960, getCurrentYear()],
   selectedGenres: [],
   currentPage: 1,
   MoviesCatalog: [],
@@ -34,7 +34,9 @@ const moviesSlice = createSlice({
     },
     setActiveOption: (state, action) => {
       state.selectedOption = action.payload;
-      state.currentPage = 1;
+    },
+    setActiveYears: (state, action) => {
+      state.selectedYears = action.payload;
     },
     setActivePage: (state, action) => {
       state.currentPage = action.payload.currentPage;
@@ -43,7 +45,7 @@ const moviesSlice = createSlice({
       return {
         ...state,
         selectedOption: "Популярное",
-        selectedYears: [1980, getCurrentYear()],
+        selectedYears: [1960, getCurrentYear()],
         selectedGenres: [],
         currentPage: 1,
       };
@@ -56,7 +58,7 @@ const moviesSlice = createSlice({
   },
 });
 
-export const { setSearchMovie, setActiveOption, setActivePage, resetFilters } =
+export const { setSearchMovie, setActiveOption, setActiveYears, setActivePage, resetFilters } =
   moviesSlice.actions;
 export { searchMovie };
 export default moviesSlice.reducer;
