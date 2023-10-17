@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Slider, Typography } from "@mui/material";
 import { setActiveYears } from "../../slices/movies_slice";
-import { getCurrentYear } from "../../utils/utils";
+import { getCurrentYear } from "../../utils/get_current_year";
 
 const SortByYears = () => {
   const years = useSelector((state) => state.movies.selectedYears);

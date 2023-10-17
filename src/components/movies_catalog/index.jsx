@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/material";
 import { createUrl } from "../../utils/create_url";
 import { fetchMoviesData } from "../../slices/movies_slice";
+import MovieCard from "../movie_card";
 
 const MoviesCatalog = () => {
   const option = useSelector((state) => state.movies.selectedOption);
@@ -27,7 +28,7 @@ const MoviesCatalog = () => {
 
   const renderedMovies = useMemo(
     () =>
-      moviesCatalog?.map((movie) => <MovieCard key={movie.id} film={movie} />),
+      moviesCatalog?.map((movie) => <MovieCard key={movie.id} movie={movie} />),
     [moviesCatalog]
   );
 
