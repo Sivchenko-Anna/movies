@@ -37,7 +37,9 @@ const MoviesCatalog = () => {
       sx={{
         display: "flex",
         flexWrap: "wrap",
-        justifyContent: "space-between",
+        alignItems: "flex-start",
+        alignContent: "flex-start",
+        gap: "12px",
       }}
     >
       {renderedMovies}
