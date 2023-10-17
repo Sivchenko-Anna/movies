@@ -34,6 +34,14 @@ const fetchGenres = createAsyncThunk("movies/fetchGenres", async () => {
   return data.genres;
 });
 
+const fetchMoviesData = createAsyncThunk(
+  "movies/fetchMoviesData",
+  async (url) => {
+    const response = await getData(url);
+    return response.results;
+  }
+);
+
 const moviesSlice = createSlice({
   name: "movies",
   initialState,
@@ -70,6 +78,9 @@ const moviesSlice = createSlice({
       })
       .addCase(fetchGenres.fulfilled, (state, action) => {
         state.genres = action.payload;
+      })
+      .addCase(fetchMoviesData.fulfilled, (state, action) => {
+        state.moviesCatalog = action.payload;
       });
   },
 });
@@ -82,5 +93,5 @@ export const {
   setActivePage,
   resetFilters,
 } = moviesSlice.actions;
-export { searchMovie, fetchGenres };
+export { searchMovie, fetchGenres, fetchMoviesData };
 export default moviesSlice.reducer;

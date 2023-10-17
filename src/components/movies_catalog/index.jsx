@@ -2,6 +2,7 @@ import { useEffect, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/material";
 import { createUrl } from "../../utils/create_url";
+import { fetchMoviesData } from "../../slices/movies_slice";
 
 const MoviesCatalog = () => {
   const option = useSelector((state) => state.movies.selectedOption);
