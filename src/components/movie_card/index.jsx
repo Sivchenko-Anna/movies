@@ -1,13 +1,19 @@
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import { STYLES } from "./styles";
+import MovieImg from "../movie_img";
 
 const MovieCard = ({ movie }) => {
   return (
     <Card sx={STYLES.CARD}>
-      <CardMedia>
-        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
-      </CardMedia>
-      <CardContent sx={STYLES.CONTENT}>
+      <MovieImg poster={movie.poster_path} />
+      <CardContent
+        sx={{
+          ...STYLES.CONTENT,
+          "&:last-child": {
+            paddingBottom: "10px",
+          },
+        }}
+      >
         <Typography color="text.primary" sx={STYLES.TEXT_TITLE}>
           {movie.title}
         </Typography>
