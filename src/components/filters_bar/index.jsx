@@ -18,7 +18,7 @@ const FiltersBar = () => {
         alignItems: "center",
       }}
     >
-      <Typography variant="h5" component="h5" color="text.secondary">
+      <Typography variant="h5" component="h6" color="text.secondary">
         Фильтры
       </Typography>
       <IconButton onClick={handleReset}>

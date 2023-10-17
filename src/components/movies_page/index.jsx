@@ -7,7 +7,7 @@ const MoviesPage = () => {
     <Box
       sx={{
         display: "flex",
-        gap: "10px",
+        gap: "20px",
         alignItems: "flex-start",
       }}
       p={1}

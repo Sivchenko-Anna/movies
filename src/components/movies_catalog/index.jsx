@@ -32,7 +32,17 @@ const MoviesCatalog = () => {
     [moviesCatalog]
   );
 
-  return <Box sx={{ display: "flex", flexWrap: "wrap" }}>{renderedMovies}</Box>;
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-between",
+      }}
+    >
+      {renderedMovies}
+    </Box>
+  );
 };
 
 export default MoviesCatalog;
