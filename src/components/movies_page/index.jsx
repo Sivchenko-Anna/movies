@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import Sidebar from "../sidebar";
+import MoviesCatalog from "../movies_catalog";
 
 const MoviesPage = () => {
   return (
@@ -12,6 +13,7 @@ const MoviesPage = () => {
       p={1}
     >
       <Sidebar />
+      <MoviesCatalog />
     </Box>
   );
 };

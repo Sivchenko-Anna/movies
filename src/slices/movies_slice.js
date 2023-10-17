@@ -15,7 +15,7 @@ const initialState = {
   selectedGenres: [],
   genres: [],
   currentPage: 1,
-  MoviesCatalog: [],
+  moviesCatalog: [],
 };
 
 const searchMovie = createAsyncThunk("movies/searchMovie", async (query) => {
@@ -66,7 +66,7 @@ const moviesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(searchMovie.fulfilled, (state, action) => {
-        state.MoviesCatalog = action.payload.results;
+        state.moviesCatalog = action.payload.results;
       })
       .addCase(fetchGenres.fulfilled, (state, action) => {
         state.genres = action.payload;
