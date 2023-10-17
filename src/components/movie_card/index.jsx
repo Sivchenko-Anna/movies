@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Card, CardContent, Typography } from "@mui/material";
 import { STYLES } from "./styles";
 import MovieImg from "../movie_img";
@@ -23,6 +24,10 @@ const MovieCard = ({ movie }) => {
       </CardContent>
     </Card>
   );
+};
+
+MovieCard.propTypes = {
+  movie: PropTypes.object.isRequired,
 };
 
 export default MovieCard;

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { CardMedia } from "@mui/material";
 
 const MovieImg = ({ poster }) => {
@@ -25,6 +26,10 @@ const MovieImg = ({ poster }) => {
       )}
     </CardMedia>
   );
+};
+
+MovieImg.propTypes = {
+  poster: PropTypes.string,
 };
 
 export default MovieImg;
