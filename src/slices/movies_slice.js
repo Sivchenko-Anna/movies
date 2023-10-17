@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getSearchMovie } from "../api/get_search_movie";
-import { getCurrentYear } from "../utils/utils";
+import { getCurrentYear } from "../utils/get_current_year";
 import { getData } from "../api/get_data";
 import { API } from "../api/variables";
 
