@@ -28,6 +28,19 @@ const STYLES = {
     fontSize: "14px",
     color: "#a9a9a9",
   },
+  CARD_ACTIONS: {
+    width: 1,
+    position: "absolute",
+    top: 0,
+    right: 0,
+    display: "flex",
+    flexDirection: "end",
+    justifyContent: "end",
+    alignItems: "center",
+    paddingTop: "10px",
+    backgroundColor: "rgba(0, 0, 0, 1)",
+    background: "linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0))",
+  },
 };
 
 export { STYLES };

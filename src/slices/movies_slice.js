@@ -16,6 +16,7 @@ const initialState = {
   genres: [],
   currentPage: 1,
   moviesCatalog: [],
+  favoriteMovies: [],
 };
 
 const searchMovie = createAsyncThunk(
