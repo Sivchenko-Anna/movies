@@ -18,15 +18,18 @@ const initialState = {
   moviesCatalog: [],
 };
 
-const searchMovie = createAsyncThunk("movies/searchMovie", async (query) => {
-  try {
-    const response = await getSearchMovie(query);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    throw new Error("Error search Movie:", error);
+const searchMovie = createAsyncThunk(
+  "movies/searchMovie",
+  async (query, { dispatch }) => {
+    try {
+      const search = await getSearchMovie(query);
+      dispatch(setMoviesCatalog(search.results));
+      return search.results;
+    } catch (error) {
+      throw new Error("Error search Movie:", error);
+    }
   }
-});
+);
 
 const fetchGenres = createAsyncThunk("movies/fetchGenres", async () => {
   const url = `${API.URL}${API.LINKS.GENRE}?${API.LINKS.LANGUAGE}`
@@ -47,7 +50,7 @@ const moviesSlice = createSlice({
   initialState,
   reducers: {
     setSearchMovie: (state, action) => {
-      state.search = action.payload.search;
+      state.search = action.payload;
     },
     setActiveOption: (state, action) => {
       state.selectedOption = action.payload;
@@ -60,6 +63,9 @@ const moviesSlice = createSlice({
     },
     setActivePage: (state, action) => {
       state.currentPage = action.payload.currentPage;
+    },
+    setMoviesCatalog: (state, action) => {
+      state.moviesCatalog = action.payload;
     },
     resetFilters: (state) => {
       return {
@@ -74,7 +80,7 @@ const moviesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(searchMovie.fulfilled, (state, action) => {
-        state.moviesCatalog = action.payload.results;
+        state.moviesCatalog = action.payload;
       })
       .addCase(fetchGenres.fulfilled, (state, action) => {
         state.genres = action.payload;
@@ -91,6 +97,7 @@ export const {
   setActiveYears,
   setActiveGenres,
   setActivePage,
+  setMoviesCatalog,
   resetFilters,
 } = moviesSlice.actions;
 export { searchMovie, fetchGenres, fetchMoviesData };

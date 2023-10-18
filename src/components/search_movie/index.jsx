@@ -1,42 +1,45 @@
-import { useContext, useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useContext, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, IconButton } from "@mui/material";
 import { ColorThemeContext } from "../../theme/toggle_theme";
-import { searchMovie, setSearchMovie } from "../../slices/movies_slice";
+import { setSearchMovie, searchMovie } from "../../slices/movies_slice";
 
 const MovieSearchInput = () => {
-  const [searchTimeout, setSearchTimeout] = useState(null);
   const { theme } = useContext(ColorThemeContext);
+  const search = useSelector((state) => state.movies.search);
   const dispatch = useDispatch();
 
-  const handleSearchChange = useCallback(
+  const handleInputChange = (event) => {
+    dispatch(setSearchMovie(event.target.value));
+  };
+
+  const handleSearch = useCallback(
     (event) => {
-      clearTimeout(searchTimeout);
-
-      const text = event.target.value;
-      dispatch(setSearchMovie({ search: text }));
-
-      const newTimeout = setTimeout(() => {
-        dispatch(searchMovie(text));
-      }, 300);
-
-      setSearchTimeout(newTimeout);
+      dispatch(searchMovie(search));
+      dispatch(setSearchMovie(""));
+      event.preventDefault();
     },
-    [dispatch, searchTimeout]
+    [dispatch, search]
   );
 
   return (
     <Box sx={{ display: "flex", alignItems: "center" }} pt={2}>
       <TextField
         label="Название фильма"
-        onChange={handleSearchChange}
+        value={search}
+        onChange={handleInputChange}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleSearch(e);
+          }
+        }}
         variant="outlined"
         fullWidth
         InputProps={{
           endAdornment: (
-            <IconButton edge="end">
+            <IconButton onClick={handleSearch} edge="end">
               <SearchIcon />
             </IconButton>
           ),
