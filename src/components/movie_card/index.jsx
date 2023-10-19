@@ -1,16 +1,59 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { Card, CardActions, CardContent, IconButton, Typography } from "@mui/material";
 import StarBorderIcon from '@mui/icons-material/StarBorder'
 import StarIcon from '@mui/icons-material/Star'
 import { STYLES } from "./styles";
 import MovieImg from "../movie_img";
-import { useState } from "react";
+import { setUser } from "../../slices/user_slice";
+import {
+  toggleFavoriteMovie,
+  setFavoriteMovies,
+} from "../../slices/movies_slice";
+import {postFavoriteMovie} from "../../api/post_favotite_movie"
 
-const MovieCard = ({ movie }) => {
-  const [isFavorite, setIsFavorite] = useState(false)
+const MovieCard = ({ movie, isFavorite }) => {
+  const [isMovieFavorite, setIsMovieFavorite] = useState(isFavorite);
+  const accountId = useSelector((state) => state.user.accountId);
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const favoriteMovies = useSelector((state) => state.movies.favoriteMovies);
+  const dispatch = useDispatch();
 
-  const handleChange = () => {
-    setIsFavorite(!isFavorite);
+  async function handleFavoriteClick() {
+    if (!isAuthenticated) {
+      dispatch(setUser({ isAuthenticated: false }));
+      return;
+    }
+
+    const updatedFavoriteValue = !isMovieFavorite;
+    dispatch(toggleFavoriteMovie(movie.id));
+
+    try {
+      const response = await postFavoriteMovie(
+        accountId,
+        movie.id,
+        updatedFavoriteValue
+      );
+      if (response.success) {
+        if (updatedFavoriteValue) {
+          if (!favoriteMovies.includes(movie.id)) {
+            dispatch(setFavoriteMovies([...favoriteMovies, movie.id]));
+          }
+        } else {
+          const updatedFavoriteMovies = favoriteMovies.filter(
+            (movieId) => movieId !== movie.id
+          );
+          dispatch(setFavoriteMovies(updatedFavoriteMovies));
+        }
+        setIsMovieFavorite(updatedFavoriteValue);
+      } else {
+        setIsMovieFavorite(!updatedFavoriteValue);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsMovieFavorite(!updatedFavoriteValue);
+    }
   }
 
   return (
@@ -32,8 +75,8 @@ const MovieCard = ({ movie }) => {
         </Typography>
       </CardContent>
       <CardActions sx={STYLES.CARD_ACTIONS}>
-        <IconButton onClick={handleChange}>
-          {isFavorite ? (
+        <IconButton onClick={handleFavoriteClick}>
+          {isMovieFavorite ? (
             <StarIcon
               sx={{
                 width: 30,
@@ -61,6 +104,7 @@ const MovieCard = ({ movie }) => {
 
 MovieCard.propTypes = {
   movie: PropTypes.object.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
 };
 
 export default MovieCard;

@@ -17,7 +17,6 @@ export async function postFavoriteMovie(accountId, movieId, isFavorite) {
       }),
     });
     const data = await response.json();
-    console.log(data)
     return data;
   } catch (error) {
     console.error("Error POST data:", error);

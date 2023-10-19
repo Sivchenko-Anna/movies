@@ -1,8 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
 import { getSearchMovie } from "../api/get_search_movie";
 import { getCurrentYear } from "../utils/get_current_year";
 import { getData } from "../api/get_data";
 import { API } from "../api/variables";
+
+const favoriteMovies = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
 
 const initialState = {
   search: "",
@@ -16,8 +19,30 @@ const initialState = {
   genres: [],
   currentPage: 1,
   moviesCatalog: [],
-  favoriteMovies: [],
+  favoriteMovies: favoriteMovies,
 };
+
+export const favoriteListSelector = createSelector(
+  (state) => state.movies.favoriteMovies,
+  (favoriteMovies) => new Set(favoriteMovies)
+);
+
+export const toggleFavoriteMovie = (movieId) => (dispatch, getState) => {
+  const { favoriteMovies } = getState().movies;
+  const updatedFavoriteMovies = favoriteMovies.includes(movieId)
+    ? favoriteMovies.filter((id) => id !== movieId)
+    : [...favoriteMovies, movieId];
+  dispatch(setFavoriteMovies(updatedFavoriteMovies));
+};
+
+export const fetchFavoriteMovies = createAsyncThunk(
+  "movies/fetchFavoriteMovies",
+  async (accountId) => {
+    const url = `${API.URL}${API.LINKS.GET_FAVOTIRE(accountId)}`;
+    const movieFavoriteList = await await getData(url);
+    return movieFavoriteList.results.map((movie) => movie.id);
+  }
+);
 
 const searchMovie = createAsyncThunk(
   "movies/searchMovie",
@@ -68,6 +93,10 @@ const moviesSlice = createSlice({
     setMoviesCatalog: (state, action) => {
       state.moviesCatalog = action.payload;
     },
+    setFavoriteMovies: (state, action) => {
+      state.favoriteMovies = action.payload;
+      localStorage.setItem("favoriteMovies", JSON.stringify(action.payload));
+    },
     resetFilters: (state) => {
       return {
         ...state,
@@ -99,6 +128,7 @@ export const {
   setActiveGenres,
   setActivePage,
   setMoviesCatalog,
+  setFavoriteMovies,
   resetFilters,
 } = moviesSlice.actions;
 export { searchMovie, fetchGenres, fetchMoviesData };
