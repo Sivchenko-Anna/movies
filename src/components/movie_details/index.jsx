@@ -4,17 +4,16 @@ import {
   IconButton,
   TableContainer,
   Typography,
-  TableBody,
-  TableRow,
-  TableCell,
+  TableBody
 } from "@mui/material";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { getMoviesInfo } from "../../api/get_movies_info";
 import { API } from "../../api/variables";
 import { getNames } from "../../utils/get_names";
+import MovieDetailsTable from "../movie_details_table";
 
 const MovieDetails = () => {
-  const { credits, info } = useLoaderData();
+  const { info, credits } = useLoaderData();
 
   const navigate = useNavigate();
   const goBack = () => navigate("/");
@@ -28,9 +27,11 @@ const MovieDetails = () => {
     budget: `$ ${info.budget.toLocaleString()}`,
     revenue: `$ ${info.revenue.toLocaleString()}`,
   };
+  console.log(credits.cast);
   const actors = getNames(credits.cast, "known_for_department", "Acting");
-  const directors = getNames(credits.cast, "job", "Directing");
-  const writers = getNames(credits.cast, "job", "Writing");
+  const directors = getNames(credits.cast, "known_for_department", "Directing");
+  console.log(directors);
+  const producer = getNames(credits.cast, "known_for_department", "Production");
 
   return (
     <Box>
@@ -50,12 +51,14 @@ const MovieDetails = () => {
           <Typography variant="h5">Детали:</Typography>
           <TableContainer component="table">
             <TableBody>
-              <TableRow>
-                <TableCell>Страна</TableCell>
-                <TableCell align="right">
-                  {data.country}
-                </TableCell>
-              </TableRow>
+              <MovieDetailsTable title="Страна" data={data.country} />
+              <MovieDetailsTable title="Год" data={data.year} />
+              <MovieDetailsTable title="Жанры" data={data.genres} />
+              <MovieDetailsTable title="Длительность" data={data.runtime} />
+              <MovieDetailsTable title="Бюджет" data={data.budget} />
+              <MovieDetailsTable title="Доход" data={data.revenue} />
+              <MovieDetailsTable title="Режиссер" data={directors} />
+              <MovieDetailsTable title="Продюсер" data={producer} />
             </TableBody>
           </TableContainer>
         </Box>
