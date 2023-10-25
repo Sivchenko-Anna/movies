@@ -1,4 +1,4 @@
-const getName = (people, profession, value) => {
+const getNames = (people, profession, value) => {
   return (
     people
       .filter((person) => person[profession] === value)
@@ -7,4 +7,4 @@ const getName = (people, profession, value) => {
   );
 };
 
-export { getName };
+export { getNames };
