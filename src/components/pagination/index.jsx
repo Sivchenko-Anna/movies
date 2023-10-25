@@ -20,7 +20,7 @@ const PaginationMovies = () => {
   return (
     <Stack>
       <Pagination
-        count={500}
+        count={250}
         page={page}
         size="small"
         color="secondary"

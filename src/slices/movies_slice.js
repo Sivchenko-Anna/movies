@@ -22,12 +22,12 @@ const initialState = {
   favoriteMovies: favoriteMovies,
 };
 
-export const favoriteListSelector = createSelector(
+const favoriteListSelector = createSelector(
   (state) => state.movies.favoriteMovies,
   (favoriteMovies) => new Set(favoriteMovies)
 );
 
-export const toggleFavoriteMovie = (movieId) => (dispatch, getState) => {
+const toggleFavoriteMovie = (movieId) => (dispatch, getState) => {
   const { favoriteMovies } = getState().movies;
   const updatedFavoriteMovies = favoriteMovies.includes(movieId)
     ? favoriteMovies.filter((id) => id !== movieId)
@@ -35,7 +35,7 @@ export const toggleFavoriteMovie = (movieId) => (dispatch, getState) => {
   dispatch(setFavoriteMovies(updatedFavoriteMovies));
 };
 
-export const fetchFavoriteMovies = createAsyncThunk(
+const fetchFavoriteMovies = createAsyncThunk(
   "movies/fetchFavoriteMovies",
   async (accountId) => {
     const url = `${API.URL}${API.LINKS.GET_FAVOTIRE(accountId)}`;
@@ -131,5 +131,12 @@ export const {
   setFavoriteMovies,
   resetFilters,
 } = moviesSlice.actions;
-export { searchMovie, fetchGenres, fetchMoviesData };
+export {
+  searchMovie,
+  fetchGenres,
+  fetchMoviesData,
+  fetchFavoriteMovies,
+  toggleFavoriteMovie,
+  favoriteListSelector,
+};
 export default moviesSlice.reducer;

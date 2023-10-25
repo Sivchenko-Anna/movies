@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { Card, CardActions, CardContent, IconButton, Typography } from "@mui/material";
@@ -14,7 +13,6 @@ import {
 import {postFavoriteMovie} from "../../api/post_favotite_movie"
 
 const MovieCard = ({ movie, isFavorite }) => {
-  const [isMovieFavorite, setIsMovieFavorite] = useState(isFavorite);
   const accountId = useSelector((state) => state.user.accountId);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const favoriteMovies = useSelector((state) => state.movies.favoriteMovies);
@@ -26,7 +24,7 @@ const MovieCard = ({ movie, isFavorite }) => {
       return;
     }
 
-    const updatedFavoriteValue = !isMovieFavorite;
+    const updatedFavoriteValue = !isFavorite;
     dispatch(toggleFavoriteMovie(movie.id));
 
     try {
@@ -46,15 +44,38 @@ const MovieCard = ({ movie, isFavorite }) => {
           );
           dispatch(setFavoriteMovies(updatedFavoriteMovies));
         }
-        setIsMovieFavorite(updatedFavoriteValue);
-      } else {
-        setIsMovieFavorite(!updatedFavoriteValue);
       }
     } catch (error) {
       console.error(error);
-      setIsMovieFavorite(!updatedFavoriteValue);
     }
   }
+
+  const renderFavoriteIcon = () => {
+    if (isFavorite) {
+      return (
+        <StarIcon
+          sx={{
+            width: 30,
+            height: 30,
+            transition: "color 0.5s ease",
+            color: "orange",
+          }}
+        />
+      );
+    } else {
+      return (
+        <StarBorderIcon
+          sx={{
+            width: 30,
+            height: 30,
+            color: "white",
+            transition: "color 0.5s ease",
+            "&:hover": { color: "orange" },
+          }}
+        />
+      );
+    }
+  };
 
   return (
     <Card sx={STYLES.CARD}>
@@ -76,26 +97,7 @@ const MovieCard = ({ movie, isFavorite }) => {
       </CardContent>
       <CardActions sx={STYLES.CARD_ACTIONS}>
         <IconButton onClick={handleFavoriteClick}>
-          {isMovieFavorite ? (
-            <StarIcon
-              sx={{
-                width: 30,
-                height: 30,
-                transition: "color 0.5s ease",
-                color: "orange",
-              }}
-            />
-          ) : (
-            <StarBorderIcon
-              sx={{
-                width: 30,
-                height: 30,
-                color: "white",
-                transition: "color 0.5s ease",
-                "&:hover": { color: "orange" },
-              }}
-            />
-          )}
+          {renderFavoriteIcon()}
         </IconButton>
       </CardActions>
     </Card>
