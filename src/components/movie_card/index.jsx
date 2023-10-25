@@ -11,6 +11,7 @@ import {
   setFavoriteMovies,
 } from "../../slices/movies_slice";
 import {postFavoriteMovie} from "../../api/post_favotite_movie"
+import { Link } from "react-router-dom";
 
 const MovieCard = ({ movie, isFavorite }) => {
   const accountId = useSelector((state) => state.user.accountId);
@@ -79,7 +80,9 @@ const MovieCard = ({ movie, isFavorite }) => {
 
   return (
     <Card sx={STYLES.CARD}>
-      <MovieImg poster={movie.poster_path} />
+      <Link to={`movie/${movie.id}`}>
+        <MovieImg poster={movie.poster_path} />
+      </Link>
       <CardContent
         sx={{
           ...STYLES.CONTENT,

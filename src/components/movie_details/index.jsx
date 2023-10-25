@@ -1,6 +1,8 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Box, IconButton, Typography } from "@mui/material";
 import { useLoaderData, Link } from "react-router-dom";
+import { getMoviesInfo } from "../../api/get_movies_info";
+import { API } from "../../api/variables";
 
 const MovieDetails = () => {
   const { info } = useLoaderData();
@@ -34,6 +36,13 @@ const MovieDetails = () => {
       </Box>
     </Box>
   );
+};
+
+export const loader = async ({ params }) => {
+  const info = await getMoviesInfo(API.LINKS.INFO, params.movieId);
+  const credits = await getMoviesInfo(API.LINKS.CREDITS, params.movieId);
+
+  return { info, credits };
 };
 
 export default MovieDetails;
