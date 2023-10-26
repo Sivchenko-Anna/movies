@@ -12,6 +12,7 @@ const themeLight = createTheme({
     text: {
       primary: "#FFFFFF",
       secondary: "#5e35b1",
+      default: "#000000",
     },
     background: {
       paper: "#FFFFFF",

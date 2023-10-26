@@ -12,6 +12,7 @@ const themeDark = createTheme({
     text: {
       primary: "#FFFFFF",
       secondary: "#FFFFFF",
+      default: "#FFFFFF",
     },
     background: {
       paper: "#0c0e10",

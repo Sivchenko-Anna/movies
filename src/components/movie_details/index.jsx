@@ -4,10 +4,11 @@ import {
   IconButton,
   TableContainer,
   Typography,
-  TableBody
+  TableBody,
 } from "@mui/material";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { getNames } from "../../utils/get_names";
+import { STYLES } from "./styles";
 import MovieDetailsTable from "../movie_details_table";
 
 const MovieDetails = () => {
@@ -31,23 +32,23 @@ const MovieDetails = () => {
   const producer = getNames(credits.cast, "known_for_department", "Production");
 
   return (
-    <Box>
-      <Box>
-        <img src={data.poster} alt={info.title} />
+    <Box sx={STYLES.BOX} p={1}>
+      <Box sx={STYLES.POSTER}>
+        <img src={data.poster} alt={info.title} style={STYLES.IMG} />
       </Box>
-      <Box>
+      <Box sx={STYLES.CONTAINER_DETAILS}>
         <Box>
-          <Typography variant="h4">{info.title}</Typography>
+          <Typography variant="h4" color="text.default" sx={{textAlign: "center"}}>
+            {info.title}
+          </Typography>
         </Box>
         <Box>
-          <Typography variant="h5">Актеры:</Typography>
-          <br></br>
-          {actors}
-        </Box>
-        <Box>
-          <Typography variant="h5">Детали:</Typography>
+          <Typography variant="h5" color="text.default">
+            Детали
+          </Typography>
           <TableContainer component="table">
             <TableBody>
+              <MovieDetailsTable title="Актеры" data={actors} />
               <MovieDetailsTable title="Страна" data={data.country} />
               <MovieDetailsTable title="Год" data={data.year} />
               <MovieDetailsTable title="Жанры" data={data.genres} />
