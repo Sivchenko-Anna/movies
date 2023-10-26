@@ -8,6 +8,7 @@ const STYLES = {
     width: "300px",
     maxHeight: "450px",
     alignSelf: "center",
+    marginTop: "40px"
   },
   IMG: {
     maxWidth: "100%",

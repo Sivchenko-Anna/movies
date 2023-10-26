@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 const MovieDetailsTable = ({title, data}) => {
   return (
     <TableRow>
-      <TableCell sx={{ padding: "2px" }}>
+      <TableCell sx={{ padding: "2px 10px" }}>
         <Typography variant="subtitle1" color="text.default">
           {title}
         </Typography>
       </TableCell>
-      <TableCell sx={{ padding: "2px" }}>
+      <TableCell sx={{ padding: "2px 16px" }}>
         <Typography variant="subtitle1" color="text.default">
           {data}
         </Typography>

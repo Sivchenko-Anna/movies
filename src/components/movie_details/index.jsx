@@ -43,9 +43,6 @@ const MovieDetails = () => {
           </Typography>
         </Box>
         <Box>
-          <Typography variant="h5" color="text.default">
-            Детали
-          </Typography>
           <TableContainer component="table">
             <TableBody>
               <MovieDetailsTable title="Актеры" data={actors} />
