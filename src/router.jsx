@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import MoviesPage from "./components/movies_page";
 import MovieDetails from "./components/movie_details";
-import { loader as movieLoader } from "./components/movie_details"
+import { loader as movieLoader } from "./components/movie_details/loader"
 
 export const router = createBrowserRouter([
   {

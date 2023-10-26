@@ -16,7 +16,11 @@ const MovieDetailsTable = ({title, data}) => {
 
 MovieDetailsTable.propTypes = {
   title: PropTypes.string.isRequired,
-  data: PropTypes.string,
+  data: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array,
+  ]),
 };
 
 

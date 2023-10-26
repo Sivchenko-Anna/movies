@@ -7,8 +7,6 @@ import {
   TableBody
 } from "@mui/material";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { getMoviesInfo } from "../../api/get_movies_info";
-import { API } from "../../api/variables";
 import { getNames } from "../../utils/get_names";
 import MovieDetailsTable from "../movie_details_table";
 
@@ -27,10 +25,9 @@ const MovieDetails = () => {
     budget: `$ ${info.budget.toLocaleString()}`,
     revenue: `$ ${info.revenue.toLocaleString()}`,
   };
-  console.log(credits.cast);
+
   const actors = getNames(credits.cast, "known_for_department", "Acting");
   const directors = getNames(credits.cast, "known_for_department", "Directing");
-  console.log(directors);
   const producer = getNames(credits.cast, "known_for_department", "Production");
 
   return (
@@ -70,13 +67,6 @@ const MovieDetails = () => {
       </Box>
     </Box>
   );
-};
-
-export const loader = async ({ params }) => {
-  const info = await getMoviesInfo(API.LINKS.INFO, params.movieId);
-  const credits = await getMoviesInfo(API.LINKS.CREDITS, params.movieId);
-
-  return { info, credits };
 };
 
 export default MovieDetails;
