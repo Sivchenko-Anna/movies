@@ -4,6 +4,7 @@ import { Box, Paper, Typography, IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import MovieCard from "../movie_card";
 import { favoriteListSelector } from "../../slices/movies_slice";
+import { STYLES } from "./styles";
 
 const UserPage = () => {
   const {
@@ -34,20 +35,29 @@ const UserPage = () => {
   });
 
   return (
-    <Box>
-      <Paper elevation={4}>
-        <Box>
-          <Typography variant="h6" color="text.secondary">
+    <Box sx={STYLES.BOX} p={1}>
+      <Paper
+        elevation={4}
+        // sx={{
+        //   borderRadius: "10px",
+        //   marginTop: "10px",
+        // }}
+        sx={STYLES.PAPER}
+      >
+        <Box sx={STYLES.PROFILE}>
+          <Typography variant="h5" color="text.secondary" sx={STYLES.TITLE}>
             Профиль
           </Typography>
-          <Typography>Логин: {login}</Typography>
-          <Typography>Почта: {email}</Typography>
-          <Typography>ID: {id}</Typography>
+          <Typography color="text.default">Логин: {login}</Typography>
+          <Typography color="text.default">Почта: {email}</Typography>
+          <Typography color="text.default">ID: {id}</Typography>
         </Box>
       </Paper>
-      <Box>
-        <Typography variant="h5">Избранное</Typography>
-        <Box>{renderedFavoriteMovies}</Box>
+      <Box sx={{ width: "100%" }}>
+        <Typography variant="h5" color="text.default" sx={STYLES.TITLE}>
+          Избранное
+        </Typography>
+        <Box sx={STYLES.CATALOG}>{renderedFavoriteMovies}</Box>
       </Box>
       <Box>
         <IconButton onClick={goBack}>
