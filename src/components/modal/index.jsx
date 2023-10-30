@@ -1,12 +1,17 @@
+import React from "react";
 import { useContext, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Dialog } from "@mui/material";
+import { Dialog, Slide } from "@mui/material";
 import { getUserId } from "../../slices/user_slice";
 import { ColorThemeContext } from "../../theme/toggle_theme";
 import { showModal } from "../../slices/modal_slice";
 import ModalEmail from "../modal_email";
 import ModalToken from "../modal_token";
 import ModalUser from "../modal_user";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const ModalAuthorization = () => {
   const { theme } = useContext(ColorThemeContext);
@@ -19,13 +24,8 @@ const ModalAuthorization = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchAuthComplete = async () => {
-      if (userToken) {
-        dispatch(getUserId());
-      }
-    };
     if (userToken) {
-      fetchAuthComplete();
+      dispatch(getUserId());
     }
   }, [dispatch, userToken]);
 
@@ -50,6 +50,7 @@ const ModalAuthorization = () => {
     <Dialog
       open={open}
       onClose={handleCloseModal}
+      TransitionComponent={Transition}
       fullWidth={true}
       sx={{
         "& .MuiPaper-root": {
