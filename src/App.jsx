@@ -5,6 +5,7 @@ import Header from "./components/header/index.jsx";
 import ToggleTheme from "./theme/toggle_theme";
 import Main from "./components/main/index.jsx";
 import AuthorizationMessage from "./components/authorization_message/index.jsx";
+import Loading from "./components/loading/index.jsx";
 
 function App() {
   const isUserAuthorize = useSelector((state) => state.user.isAuthenticated);
@@ -13,7 +14,9 @@ function App() {
       <ToggleTheme>
         <CssBaseline />
         <Header />
-        <Main>{content}</Main>
+        <Loading>
+          <Main>{content}</Main>
+        </Loading>
       </ToggleTheme>
   );
 }
