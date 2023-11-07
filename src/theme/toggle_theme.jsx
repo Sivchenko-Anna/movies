@@ -11,17 +11,17 @@ ToggleTheme.propTypes = {
 };
 
 function ToggleTheme({ children }) {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
 
   const actualTheme = useMemo(
-    () => (theme === "light" ? themeLight : themeDark),
+    () => (theme === "dark" ? themeDark : themeLight),
     [theme]
   );
   
   const colorTheme = useMemo(
     () => ({
       toggleColorMode: () => {
-        setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+        setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
       },
       theme: actualTheme,
     }),
