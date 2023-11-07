@@ -13,11 +13,13 @@ const themeDark = createTheme({
       primary: "#FFFFFF",
       secondary: "#FFFFFF",
       default: "#FFFFFF",
+      message: "#000000",
     },
     background: {
       paper: "#0c0e10",
       default: "#0c0e10",
       custom: "#b388ff",
+      message: "#b388ff",
     },
   },
 });

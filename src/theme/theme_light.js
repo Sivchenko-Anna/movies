@@ -13,11 +13,13 @@ const themeLight = createTheme({
       primary: "#FFFFFF",
       secondary: "#5e35b1",
       default: "#000000",
+      message: "#FFFFFF",
     },
     background: {
       paper: "#FFFFFF",
       default: "#FFFFFF",
       custom: "#6e49b8",
+      message: "#b388ff",
     },
   },
 });
